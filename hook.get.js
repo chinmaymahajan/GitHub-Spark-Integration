@@ -48,7 +48,7 @@ module['exports'] = function myService (req, res, next) {
 			+ hook.params.comment.body
 			+ " from user "
 			+ hook.params.comment.user.login
-			+ "On his PR " + userEmail;
+			+ "On this PR " + hook.params.pull_request.html_url;
 			postInRoom(message);
 		}
 
