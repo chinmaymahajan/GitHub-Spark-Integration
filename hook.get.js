@@ -43,9 +43,9 @@ module['exports'] = function myService (req, res, next) {
 			+ " from user "
 			+ hook.params.comment.user.login
 			+ "On his PR " + userEmail;
+}
 
-
-    axios.get('https://api.ciscospark.com/v1/people', {
+/*    axios.get('https://api.ciscospark.com/v1/people', {
       		email: userEmail
 		},
 		{
@@ -84,7 +84,7 @@ module['exports'] = function myService (req, res, next) {
 				done();
 			});
 	} //if to send individual messages
-
+*/
 	//	hook.res.end(hook.params);
 	axios.post('https://api.ciscospark.com/v1/messages',
 		{
