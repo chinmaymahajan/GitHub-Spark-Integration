@@ -49,25 +49,45 @@ module['exports'] = function myService (req, res, next) {
 			+ " from user "
 			+ hook.params.comment.user.login
 			+ "On this PR " + hook.params.pull_request.html_url;
-			postInRoom(message);
-		}
+			postToPerson(message, userEmail);
+	} //if to send individual messages
 
-/*    axios.get('https://api.ciscospark.com/v1/people', {
-      		email: userEmail
-		},
-		{
-			headers:
+	function postToPerson(message, userEmail) {
+			axios.get('https://api.ciscospark.com/v1/people/', {
+				email: userEmail
+			},
+			{
+				headers:
 			{
 				'Content-Type': 'application/json; charset=utf-8', 'Authorization': acessToken
 			}
-    }) //get request for people
-
-      .then(function (personDetails) {
-
-    var personID = personDetails.items[0].id;
+		}) //get request for people
+			.then(function (personDetails) {
+				var myId = {
+	"notFoundIds": null,
+	"items": [
+		{
+			"id": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS81N2E1YzBlNy1jZTkyLTRlYWYtOGJmNS1lZGMyYzBmMmIxNDc",
+			"emails": [
+				"chimahaj@cisco.com"
+			],
+			"displayName": "Chinmay Mahajan",
+			"nickName": "Chinmay",
+			"firstName": "Chinmay",
+			"lastName": "Mahajan",
+			"avatar": "https://1efa7a94ed216783e352-c62266528714497a17239ececf39e9e2.ssl.cf1.rackcdn.com/V1~f2053e3063fa81674f2edfd8d836dfce~afgAwbCCQH2KyE2drcnKNw==~1600",
+			"orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xZWI2NWZkZi05NjQzLTQxN2YtOTk3NC1hZDcyY2FlMGUxMGY",
+			"created": "2017-06-14T18:09:00.788Z",
+			"lastActivity": "2017-11-05T21:58:58.152Z",
+			"status": "inactive",
+			"type": "person"
+		}
+	]
+}
+				var personID = myId.items[0].id;
 				axios.post('https://api.ciscospark.com/v1/messages', {
 					toPersonId: personID,
-					text: message
+					text: personDetails
 				},
 				{
 					headers:
@@ -82,7 +102,7 @@ module['exports'] = function myService (req, res, next) {
 						hook.res.end('ok');
 					})
 					.catch((error) => {
-						assert.isNotOk(error,'Promise Persondetails  error');
+						assert.isNotOk(error,'Promise Person details  error');
 						done();
 					});
 			}) //.then
@@ -90,8 +110,8 @@ module['exports'] = function myService (req, res, next) {
 				assert.isNotOk(error,'Promise Persondetails  error');
 				done();
 			});
-	} //if to send individual messages
-*/
+		}// postToPerson
+
 	//	hook.res.end(hook.params);
 	function postInRoom (message)  {
 	axios.post('https://api.ciscospark.com/v1/messages',
