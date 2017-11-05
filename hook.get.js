@@ -93,7 +93,7 @@ module['exports'] = function myService (req, res, next) {
 	} //if to send individual messages
 */
 	//	hook.res.end(hook.params);
-	var postInRoom = message => {
+	function postInRoom (message)  {
 	axios.post('https://api.ciscospark.com/v1/messages',
 		{
 			roomId: roomId,
