@@ -10,8 +10,10 @@ module['exports'] = function myService (req, res, next) {
 	req = hook.req,
 	store = hook.datastore;
 	var message = '';
-	if (hook.params.action === "opened")
+	if (hook.params.action === "opened") {
 		message = "This pull request is open " + hook.params.action.pull_request.url;
+		postInRoom(message);
+	}
     // if (hook.params.action === "submitted")
     //  	message = "PR review subimitted for " + pull_request;
   	if (hook.params.action === "review_requested") {
@@ -20,6 +22,7 @@ module['exports'] = function myService (req, res, next) {
 		+ hook.params.pull_request.title + " - "
 		+ hook.params.pull_request.html_url + " from "
 		+ hook.params.pull_request.user.login;
+		postInRoom(message);
 	}
       /* axios.get(hook.params.pull_request.user.login.comments_url)
       .then(function (response) {
@@ -31,7 +34,10 @@ module['exports'] = function myService (req, res, next) {
       */
 
 	if (hook.params.action === "review_request_removed")
-		message = "Review is cancelled for this PR " + hook.params.pull_request.html_url;
+		 {
+			 message = "Review is cancelled for this PR " + hook.params.pull_request.html_url;
+			 postInRoom(message);
+		 }
 	// if (hook.params.label)
 	// 	message = "This PR " + hook.params.html_url + "is labeled as " + hook.params.label.name;
 	// 			/* To send individual messages */
@@ -43,7 +49,8 @@ module['exports'] = function myService (req, res, next) {
 			+ " from user "
 			+ hook.params.comment.user.login
 			+ "On his PR " + userEmail;
-}
+			postInRoom(message);
+		}
 
 /*    axios.get('https://api.ciscospark.com/v1/people', {
       		email: userEmail
@@ -86,6 +93,7 @@ module['exports'] = function myService (req, res, next) {
 	} //if to send individual messages
 */
 	//	hook.res.end(hook.params);
+	var postInRoom = message => {
 	axios.post('https://api.ciscospark.com/v1/messages',
 		{
 			roomId: roomId,
@@ -108,6 +116,7 @@ module['exports'] = function myService (req, res, next) {
 			console.log(error);
 			hook.res.end(error)
 		});
+	}// function
 /*  store.get('github', function(err, result){
     response = result;
      if (err) { return hook.res.end(err.message); }
