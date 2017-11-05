@@ -84,9 +84,9 @@ module['exports'] = function myService (req, res, next) {
 // 							}
 // 						]
 // }
-				var personID = personDetails.items[0].id;
+				// var personID = personDetails.items[0].id;
 				axios.post('https://api.ciscospark.com/v1/messages', {
-					toPersonId: personID,
+					toPersonId: 'Y2lzY29zcGFyazovL3VzL1BFT1BMRS82YzgwYmFiOS1iNjA5LTQ4NWMtYTVlOC1kMzUyM2Q3YTc3OTY',
 					text: message
 				},
 				{
