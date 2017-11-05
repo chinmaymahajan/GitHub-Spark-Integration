@@ -101,12 +101,12 @@ module['exports'] = function myService (req, res, next) {
 						} // if OK
 						hook.res.end('ok');
 					})
-					.catch(function (error) => {
+					.catch(function (error) {
 						console.log(error);
 						hook.res.end(error)
 					});
 			}) //.then
-			.catch(function (error) => {
+			.catch(function (error) {
 				console.log(error);
 				hook.res.end(error)
 			});
