@@ -10,10 +10,10 @@ module['exports'] = function myService (req, res, next) {
 	req = hook.req,
 	store = hook.datastore;
 	var message = '';
-	if (hook.params.action === "opened") {
-		message = "This pull request is open " + hook.params.action.pull_request.url;
-		postInRoom(message);
-	}
+	// if (hook.params.action === "opened") {
+	// 	message = "This pull request is open " + hook.params.action.pull_request.url;
+	// 	postInRoom(message);
+	// }
     // if (hook.params.action === "submitted")
     //  	message = "PR review subimitted for " + pull_request;
   	if (hook.params.action === "review_requested") {
