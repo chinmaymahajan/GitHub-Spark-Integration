@@ -32,9 +32,9 @@ module['exports'] = function myService (req, res, next) {
 
 	if (hook.params.action === "review_request_removed")
 		message = "Review is cancelled for this PR " + hook.params.pull_request.html_url;
-	if (hook.params.label)
-		message = "This PR " + hook.params.html_url + "is labeled as " + hook.params.label.name;
-				/* To send individual messages */
+	// if (hook.params.label)
+	// 	message = "This PR " + hook.params.html_url + "is labeled as " + hook.params.label.name;
+	// 			/* To send individual messages */
 
 	if (hook.params.action === "created") {
 		var userEmail =  hook.params.pull_request.user.login + "@cisco.com";
