@@ -64,25 +64,25 @@ module['exports'] = function myService (req, res, next) {
 		}) //get request for people
 			.then(function (personDetails) {
 				var myId = {
-	"notFoundIds": null,
-	"items": [
-		{
-			"id": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS81N2E1YzBlNy1jZTkyLTRlYWYtOGJmNS1lZGMyYzBmMmIxNDc",
-			"emails": [
-				"chimahaj@cisco.com"
-			],
-			"displayName": "Chinmay Mahajan",
-			"nickName": "Chinmay",
-			"firstName": "Chinmay",
-			"lastName": "Mahajan",
-			"avatar": "https://1efa7a94ed216783e352-c62266528714497a17239ececf39e9e2.ssl.cf1.rackcdn.com/V1~f2053e3063fa81674f2edfd8d836dfce~afgAwbCCQH2KyE2drcnKNw==~1600",
-			"orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xZWI2NWZkZi05NjQzLTQxN2YtOTk3NC1hZDcyY2FlMGUxMGY",
-			"created": "2017-06-14T18:09:00.788Z",
-			"lastActivity": "2017-11-05T21:58:58.152Z",
-			"status": "inactive",
-			"type": "person"
-		}
-	]
+						"notFoundIds": null,
+						"items": [
+							{
+								"id": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS81N2E1YzBlNy1jZTkyLTRlYWYtOGJmNS1lZGMyYzBmMmIxNDc",
+								"emails": [
+									"chimahaj@cisco.com"
+								],
+								"displayName": "Chinmay Mahajan",
+								"nickName": "Chinmay",
+								"firstName": "Chinmay",
+								"lastName": "Mahajan",
+								"avatar": "https://1efa7a94ed216783e352-c62266528714497a17239ececf39e9e2.ssl.cf1.rackcdn.com/V1~f2053e3063fa81674f2edfd8d836dfce~afgAwbCCQH2KyE2drcnKNw==~1600",
+								"orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xZWI2NWZkZi05NjQzLTQxN2YtOTk3NC1hZDcyY2FlMGUxMGY",
+								"created": "2017-06-14T18:09:00.788Z",
+								"lastActivity": "2017-11-05T21:58:58.152Z",
+								"status": "inactive",
+								"type": "person"
+							}
+						]
 }
 				var personID = myId.items[0].id;
 				axios.post('https://api.ciscospark.com/v1/messages', {
@@ -101,12 +101,12 @@ module['exports'] = function myService (req, res, next) {
 						} // if OK
 						hook.res.end('ok');
 					})
-					.catch((error) => {
+					.catch(function (error) => {
 						console.log(error);
 						hook.res.end(error)
 					});
 			}) //.then
-			.catch((error) => {
+			.catch(function (error) => {
 				console.log(error);
 				hook.res.end(error)
 			});
