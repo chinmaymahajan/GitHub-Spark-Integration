@@ -3,7 +3,7 @@ const axios = require('axios');
 var response;
 
 const roomId = 'Y2lzY29zcGFyazovL3VzL1JPT00vYjU4MmRiNTAtYzAyZS0xMWU3LWI3NjctZWQ0YmQwMjVjMjAz';
-const acessToken = 'Bearer ZGQ4YzE5YTAtNWE5ZS00NzUxLThjODgtODRlOTQ1ODA3ZDg3NTEwYzQ0NWQtZmZi';
+const acessToken = 'Bearer YjkzMTRjN2UtNDY2ZS00NWNiLTgyYWEtNjYyOGZjYTAwZTQ1ZWJkNWU0MTEtZWI2';
 
 module['exports'] = function myService (req, res, next) {
 	var res = hook.res,
