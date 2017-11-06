@@ -30,7 +30,7 @@ module['exports'] = function myService (req, res, next) {
 			 postInRoom(message);
 		 }
 
-	if (hook.params.action === "submitted") {
+	if (hook.params.action === "submitted" && !(hook.params.action === "created")) {
 		message = "Review is submitted for this PR "
 		+ hook.params.pull_request.title + " - "
 		+ hook.params.pull_request.html_url + " from "
