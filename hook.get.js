@@ -48,17 +48,20 @@ module['exports'] = function myService (req, res, next) {
 
 	if (hook.params.action === "labeled" && "created") {
 		message = "This PR is labelled as "
-		+ hook.params.label.name
+		+ hook.params.label.name + " "
 		+ hook.params.pull_request.title + " - "
 		+ hook.params.pull_request.html_url;
 		postInRoom(message);
 		// person whos PR is reviewed hook.params.pull_request.user.login;
 	}
 
-	if (hook.params.label) {
-		message = "This PR " + hook.params.html_url + "is labeled as " + hook.params.label.name;
-			postInRoom(message);
-		}
+	if (hook.params.action === "unlabeled") {
+		message = "Removed label "
+		+ hook.params.label.name + " from this PR"
+		+ hook.params.pull_request.title + " - "
+		+ hook.params.pull_request.html_url;
+		postInRoom(message);
+	}
 			/* To send individual messages */
 
 	if (hook.params.action === "created") {
