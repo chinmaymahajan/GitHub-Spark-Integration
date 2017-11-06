@@ -46,9 +46,9 @@ module['exports'] = function myService (req, res, next) {
 		postInRoom(message);
 	}
 
-	if (hook.params.action === "labeled") {
+	if (hook.params.action === "labeled" && "created") {
 		message = "This PR is labelled as "
-		+ hook.params.pull_request.head.label
+		+ hook.params.label.name
 		+ hook.params.pull_request.title + " - "
 		+ hook.params.pull_request.html_url;
 		postInRoom(message);
