@@ -49,9 +49,10 @@ module['exports'] = function myService (req, res, next) {
 			+ " from user "
 			+ hook.params.comment.user.login
 			+ "On this PR " + hook.params.pull_request.html_url;
-			postToPerson(message, userEmail);
+			postInRoom(message);
+		//	postToPerson(message, userEmail);
 	} //if to send individual messages
-
+/*
 	function postToPerson(message, userEmail) {
 			axios.get('https://api.ciscospark.com/v1/people/', {
 				email: userEmail
@@ -105,11 +106,12 @@ module['exports'] = function myService (req, res, next) {
 						hook.res.end(JSON.stringify(error, true, 2));
 					});
 			}) //.then
+
 			.catch(function (error) {
 				hook.res.end(JSON.stringify(error, true, 2));
 			});
 		}// postToPerson
-
+*/
 	//	hook.res.end(hook.params);
 	function postInRoom (message)  {
 	axios.post('https://api.ciscospark.com/v1/messages',
