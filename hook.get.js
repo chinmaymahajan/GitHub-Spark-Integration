@@ -31,13 +31,11 @@ module['exports'] = function myService (req, res, next) {
 		 }
 
 	if(hook.params.action === "pull_request_review") {
-		if (hook.params.action === "submitted") {
 			message = "Review is submitted for this PR "
 			+ hook.params.pull_request.title + " - "
 			+ hook.params.pull_request.html_url + " from "
 			+ hook.params.review.user.login;
 			postInRoom(message);
-		}
 	}
 
 	if (hook.params.action === "dismissed") {
