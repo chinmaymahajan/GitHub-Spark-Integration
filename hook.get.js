@@ -60,27 +60,45 @@ module['exports'] = function myService (req, res, next) {
 	}
 			/* To send individual messages */
 
-			switch (hook.params.action) {
-				case "created": var userEmail =  hook.params.pull_request.user.login + "@cisco.com";
-				message = "Review comment "
-					+ "`"+ hook.params.comment.body + "`"
-					+ " from user "
-					+ hook.params.comment.user.login
-					+ " On this PR " + hook.params.pull_request.html_url;
-					postInRoom(message);
-					break
-				case "submitted": message = "Review is submitted for this PR "
-				+ hook.params.pull_request.title + " - "
-				+ hook.params.pull_request.html_url + " from "
-				+ hook.params.review.user.login;
+	if (hook.params.action === 'submitted') {
+		if (hook.params.action === 'created') {
+			message = "Review comment "
+				+ "`"+ hook.params.comment.body + "`"
+				+ " from user "
+				+ hook.params.comment.user.login
+				+ " On this PR " + hook.params.pull_request.html_url;
 				postInRoom(message);
-					break;
-				default: 
+		} else {
+			message = "Review is submitted for this PR "
+			+ hook.params.pull_request.title + " - "
+			+ hook.params.pull_request.html_url + " from "
+			+ hook.params.review.user.login;
+			postInRoom(message);
+		}
+	}
 
-			}
+
+			// switch (hook.params.action) {
+			// 	case "created": var userEmail =  hook.params.pull_request.user.login + "@cisco.com";
+			// 	message = "Review comment "
+			// 		+ "`"+ hook.params.comment.body + "`"
+			// 		+ " from user "
+			// 		+ hook.params.comment.user.login
+			// 		+ " On this PR " + hook.params.pull_request.html_url;
+			// 		postInRoom(message);
+			// 		break
+			// 	case "submitted": message = "Review is submitted for this PR "
+			// 	+ hook.params.pull_request.title + " - "
+			// 	+ hook.params.pull_request.html_url + " from "
+			// 	+ hook.params.review.user.login;
+			// 	postInRoom(message);
+			// 		break;
+			// 	default:
+			//
+			// }
 
 		//	postToPerson(message, userEmail);
-	 //if to send individual messages
+	} //if to send individual messages
 /*
 	function postToPerson(message, userEmail) {
 			axios.get('https://api.ciscospark.com/v1/people/', {
