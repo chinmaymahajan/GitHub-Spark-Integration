@@ -64,18 +64,18 @@ module['exports'] = function myService (req, res, next) {
 		postInRoom(message);
 	}
 			/* To send individual messages */
-
-	if (hook.params.action === "created" && "submitted") {
-
-		var userEmail =  hook.params.pull_request.user.login + "@cisco.com";
-		message = "Review comment "
-			+ "`"+ hook.params.comment.body + "`"
-			+ " from user "
-			+ hook.params.comment.user.login
-			+ " On this PR " + hook.params.pull_request.html_url;
-			postInRoom(message);
-		//	postToPerson(message, userEmail);
-	} //if to send individual messages
+	if(hook.params.pull_request_review_comment) {
+		if (hook.params.action === "created") {
+			var userEmail =  hook.params.pull_request.user.login + "@cisco.com";
+			message = "Review comment "
+				+ "`"+ hook.params.comment.body + "`"
+				+ " from user "
+				+ hook.params.comment.user.login
+				+ " On this PR " + hook.params.pull_request.html_url;
+				postInRoom(message);
+			//	postToPerson(message, userEmail);
+		} //if to send individual messages
+}
 /*
 	function postToPerson(message, userEmail) {
 			axios.get('https://api.ciscospark.com/v1/people/', {
