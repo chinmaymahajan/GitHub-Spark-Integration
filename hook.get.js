@@ -17,7 +17,7 @@ module['exports'] = function myService (req, res, next) {
     if (hook.params.action === "submitted")
      	message = "PR review subimitted for " + pull_request;
 */
-	if (hook.params.action === "review_requested") {
+  	if (hook.params.action === "review_requested") {
 			message = "Review is requested for this PR "
 			+ hook.params.pull_request.title + " - "
 			+ hook.params.pull_request.html_url;
@@ -30,8 +30,14 @@ module['exports'] = function myService (req, res, next) {
 			 postInRoom(message);
 		 }
 
-	if (hook.params.action === "submitted" && !(hook.params.action === "created")) {
-
+	if(hook.params.action === pull_request_review) {
+		if (hook.params.action === "submitted") {
+			message = "Review is submitted for this PR "
+			+ hook.params.pull_request.title + " - "
+			+ hook.params.pull_request.html_url + " from "
+			+ hook.params.review.user.login;
+			postInRoom(message);
+		}
 	}
 
 	if (hook.params.action === "dismissed") {
@@ -60,45 +66,16 @@ module['exports'] = function myService (req, res, next) {
 	}
 			/* To send individual messages */
 
-	if (hook.params.action === 'submitted') {
-		if (hook.params.action === 'created') {
-			message = "Review comment "
-				+ "`"+ hook.params.comment.body + "`"
-				+ " from user "
-				+ hook.params.comment.user.login
-				+ " On this PR " + hook.params.pull_request.html_url;
-				postInRoom(message);
-		} else {
-			message = "Review is submitted for this PR "
-			+ hook.params.pull_request.title + " - "
-			+ hook.params.pull_request.html_url + " from "
-			+ hook.params.review.user.login;
+	if (hook.params.action === "created" && !(hook.params.action === "submitted") ) {
+		var userEmail =  hook.params.pull_request.user.login + "@cisco.com";
+		message = "Review comment "
+			+ "`"+ hook.params.comment.body + "`"
+			+ " from user "
+			+ hook.params.comment.user.login
+			+ " On this PR " + hook.params.pull_request.html_url;
 			postInRoom(message);
-		}
-	}
-
-
-			// switch (hook.params.action) {
-			// 	case "created": var userEmail =  hook.params.pull_request.user.login + "@cisco.com";
-			// 	message = "Review comment "
-			// 		+ "`"+ hook.params.comment.body + "`"
-			// 		+ " from user "
-			// 		+ hook.params.comment.user.login
-			// 		+ " On this PR " + hook.params.pull_request.html_url;
-			// 		postInRoom(message);
-			// 		break
-			// 	case "submitted": message = "Review is submitted for this PR "
-			// 	+ hook.params.pull_request.title + " - "
-			// 	+ hook.params.pull_request.html_url + " from "
-			// 	+ hook.params.review.user.login;
-			// 	postInRoom(message);
-			// 		break;
-			// 	default:
-			//
-			// }
-
 		//	postToPerson(message, userEmail);
-	// } //if to send individual messages
+	} //if to send individual messages
 /*
 	function postToPerson(message, userEmail) {
 			axios.get('https://api.ciscospark.com/v1/people/', {
