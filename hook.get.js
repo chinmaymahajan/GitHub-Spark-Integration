@@ -17,11 +17,10 @@ module['exports'] = function myService (req, res, next) {
     if (hook.params.action === "submitted")
      	message = "PR review subimitted for " + pull_request;
 */
-  	if (hook.params.action === "review_requested" || hook.params.action === "pull_request_review") {
+  	if (hook.params.action === "review_requested") {
 			message = "Review is requested for this PR "
 			+ hook.params.pull_request.title + " - "
-			+ hook.params.pull_request.html_url + " from "
-			+ hook.params.review.user.login;
+			+ hook.params.pull_request.html_url;
 			postInRoom(message);
 		}
 
