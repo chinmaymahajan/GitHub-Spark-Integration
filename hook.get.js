@@ -66,7 +66,9 @@ module['exports'] = function myService (req, res, next) {
 	}
 			/* To send individual messages */
 
-	if (hook.params.action === "created" && hook.params.action !== "submitted") {
+	if (hook.params.action === "created") {
+		if(hook.params.action === "submitted") {}
+		else {
 		var userEmail =  hook.params.pull_request.user.login + "@cisco.com";
 		message = "Review comment "
 			+ "`"+ hook.params.comment.body + "`"
@@ -74,6 +76,7 @@ module['exports'] = function myService (req, res, next) {
 			+ hook.params.comment.user.login
 			+ " On this PR " + hook.params.pull_request.html_url;
 			postInRoom(message);
+		}
 		//	postToPerson(message, userEmail);
 	} //if to send individual messages
 /*
