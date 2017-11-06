@@ -17,21 +17,22 @@ module['exports'] = function myService (req, res, next) {
     // if (hook.params.action === "submitted")
     //  	message = "PR review subimitted for " + pull_request;
   	if (hook.params.action === "review_requested") {
-
-		message = "Review is requested for this PR "
-		+ hook.params.pull_request.title + " - "
-		+ hook.params.pull_request.html_url + " from "
-		+ hook.params.pull_request.user.login;
-		postInRoom(message);
-	}
+			message = "Review is requested for this PR "
+			+ hook.params.pull_request.title + " - "
+			+ hook.params.pull_request.html_url + " from "
+			+ hook.params.pull_request.user.login;
+			postInRoom(message);
+		}
 
 	if (hook.params.action === "review_request_removed")
 		 {
 			 message = "Review is cancelled for this PR " + hook.params.pull_request.html_url;
 			 postInRoom(message);
 		 }
-	if (hook.params.label)
+	if (hook.params.label) {
 		message = "This PR " + hook.params.html_url + "is labeled as " + hook.params.label.name;
+			postInRoom(message);
+		}
 			/* To send individual messages */
 
 	if (hook.params.action === "created") {
