@@ -29,6 +29,22 @@ module['exports'] = function myService (req, res, next) {
 			 message = "Review is cancelled for this PR " + hook.params.pull_request.html_url;
 			 postInRoom(message);
 		 }
+
+	if (hook.params.action === "submitted") {
+		message = "Review is submitted for this PR "
+		+ hook.params.pull_request.title + " - "
+		+ hook.params.pull_request.html_url + " from "
+		+ hook.params.pull_request.user.login;
+		postInRoom(message);
+	}
+
+	if (hook.params.action === "dismissed") {
+		message = "Review is dismissed for this PR "
+		+ hook.params.pull_request.title + " - "
+		+ hook.params.pull_request.html_url + " from "
+		+ hook.params.pull_request.user.login;
+		postInRoom(message);
+	}
 	if (hook.params.label) {
 		message = "This PR " + hook.params.html_url + "is labeled as " + hook.params.label.name;
 			postInRoom(message);
