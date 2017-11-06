@@ -17,7 +17,7 @@ module['exports'] = function myService (req, res, next) {
     if (hook.params.action === "submitted")
      	message = "PR review subimitted for " + pull_request;
 */
-  	if (hook.params.action === "review_requested") {
+	if (hook.params.action === "review_requested") {
 			message = "Review is requested for this PR "
 			+ hook.params.pull_request.title + " - "
 			+ hook.params.pull_request.html_url;
@@ -64,7 +64,7 @@ module['exports'] = function myService (req, res, next) {
 	}
 			/* To send individual messages */
 
-	if (hook.params.action === "created") {
+	if (hook.params.action === "created" && !(hook.params.action === "submitted") ) {
 		var userEmail =  hook.params.pull_request.user.login + "@cisco.com";
 		message = "Review comment "
 			+ "`"+ hook.params.comment.body + "`"
