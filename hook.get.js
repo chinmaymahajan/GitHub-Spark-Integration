@@ -98,7 +98,7 @@ module['exports'] = function myService (req, res, next) {
 			// }
 
 		//	postToPerson(message, userEmail);
-	} //if to send individual messages
+	// } //if to send individual messages
 /*
 	function postToPerson(message, userEmail) {
 			axios.get('https://api.ciscospark.com/v1/people/', {
