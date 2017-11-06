@@ -30,13 +30,15 @@ module['exports'] = function myService (req, res, next) {
 			 postInRoom(message);
 		 }
 
-	if(hook.params.action === "pull_request_review") {
-			message = "Review is submitted for this PR "
-			+ hook.params.pull_request.title + " - "
-			+ hook.params.pull_request.html_url + " from "
-			+ hook.params.review.user.login;
-			postInRoom(message);
+
+	if (hook.params.action === "submitted") {
+		message = "Review is submitted for this PR "
+		+ hook.params.pull_request.title + " - "
+		+ hook.params.pull_request.html_url + " from "
+		+ hook.params.review.user.login;
+		postInRoom(message);
 	}
+
 
 	if (hook.params.action === "dismissed") {
 		message = "Review is dismissed for this PR "
@@ -64,7 +66,7 @@ module['exports'] = function myService (req, res, next) {
 	}
 			/* To send individual messages */
 
-	if (hook.params.action === "created" && !(hook.params.action === "submitted") ) {
+	if (hook.params.action === "created" && hook.params.action !== "submitted") {
 		var userEmail =  hook.params.pull_request.user.login + "@cisco.com";
 		message = "Review comment "
 			+ "`"+ hook.params.comment.body + "`"
