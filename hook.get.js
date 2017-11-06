@@ -99,16 +99,14 @@ module['exports'] = function myService (req, res, next) {
 						if (response.status === 200) {
 							console.log("personId is ", personID);
 						} // if OK
-						hook.res.end('ok');
+						hook.res.end(personID);
 					})
 					.catch(function (error) {
-						console.log(error);
-						hook.res.end(error)
+						hook.res.end('Inner then ',error)
 					});
 			}) //.then
 			.catch(function (error) {
-				console.log(error);
-				hook.res.end(error)
+				hook.res.end('Outer then',error)
 			});
 		}// postToPerson
 
@@ -127,7 +125,7 @@ module['exports'] = function myService (req, res, next) {
 		})
 		.then(function (response) {
 			if(response.status === 200) {
-				console.log("messages sent");
+				console.log("messages sent to group");
 			} // if OK
 			hook.res.end('ok');
 		})
