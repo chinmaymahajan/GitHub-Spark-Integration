@@ -102,11 +102,11 @@ module['exports'] = function myService (req, res, next) {
 						hook.res.end(personID);
 					})
 					.catch(function (error) {
-						hook.res.end(JSON.stringify(error));
+						hook.res.end(JSON.stringify(error, true, 2));
 					});
 			}) //.then
 			.catch(function (error) {
-				hook.res.end(JSON.stringify(error));
+				hook.res.end(JSON.stringify(error, true, 2));
 			});
 		}// postToPerson
 
@@ -127,12 +127,11 @@ module['exports'] = function myService (req, res, next) {
 			if(response.status === 200) {
 				console.log("messages sent to group");
 			} // if OK
-			hook.res.end('ok');
 		})
 		.catch(function (error)
 		{
 			console.log(error);
-			hook.res.end(error);
+			hook.res.end(JSON.stringify(error, true, 2));
 		});
 	}// function
 /*  store.get('github', function(err, result){
