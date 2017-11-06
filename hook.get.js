@@ -67,10 +67,10 @@ module['exports'] = function myService (req, res, next) {
 	if (hook.params.action === "created") {
 		var userEmail =  hook.params.pull_request.user.login + "@cisco.com";
 		message = "Review comment "
-			+ hook.params.comment.body
+			+ "`"+ hook.params.comment.body + "`"
 			+ " from user "
 			+ hook.params.comment.user.login
-			+ "On this PR " + hook.params.pull_request.html_url;
+			+ " On this PR " + hook.params.pull_request.html_url;
 			postInRoom(message);
 		//	postToPerson(message, userEmail);
 	} //if to send individual messages
