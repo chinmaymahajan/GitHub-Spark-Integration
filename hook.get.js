@@ -22,13 +22,12 @@ module['exports'] = function myService (req, res, next) {
 			+ hook.params.pull_request.title + " - "
 			+ hook.params.pull_request.html_url;
 			postInRoom(message);
-		}
+	}
 
-	if (hook.params.action === "review_request_removed")
-		 {
+	if (hook.params.action === "review_request_removed") {
 			 message = "Review is cancelled for this PR " + hook.params.pull_request.html_url;
 			 postInRoom(message);
-		 }
+	}
 
 
 	if (hook.params.action === "submitted") {
@@ -66,9 +65,8 @@ module['exports'] = function myService (req, res, next) {
 	}
 			/* To send individual messages */
 
-	if (hook.params.action === "created") {
-		if(hook.params.action === "submitted") {}
-		else {
+	if (hook.params.action === "created" && "submitted") {
+
 		var userEmail =  hook.params.pull_request.user.login + "@cisco.com";
 		message = "Review comment "
 			+ "`"+ hook.params.comment.body + "`"
@@ -76,7 +74,6 @@ module['exports'] = function myService (req, res, next) {
 			+ hook.params.comment.user.login
 			+ " On this PR " + hook.params.pull_request.html_url;
 			postInRoom(message);
-		}
 		//	postToPerson(message, userEmail);
 	} //if to send individual messages
 /*
