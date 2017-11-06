@@ -24,23 +24,15 @@ module['exports'] = function myService (req, res, next) {
 		+ hook.params.pull_request.user.login;
 		postInRoom(message);
 	}
-      /* axios.get(hook.params.pull_request.user.login.comments_url)
-      .then(function (response) {
-      message = message + " Here is the response " + response;
-      })
-      .catch(function (error) {
-      });
-    }
-      */
 
 	if (hook.params.action === "review_request_removed")
 		 {
 			 message = "Review is cancelled for this PR " + hook.params.pull_request.html_url;
 			 postInRoom(message);
 		 }
-	// if (hook.params.label)
-	// 	message = "This PR " + hook.params.html_url + "is labeled as " + hook.params.label.name;
-	// 			/* To send individual messages */
+	if (hook.params.label)
+		message = "This PR " + hook.params.html_url + "is labeled as " + hook.params.label.name;
+			/* To send individual messages */
 
 	if (hook.params.action === "created") {
 		var userEmail =  hook.params.pull_request.user.login + "@cisco.com";
