@@ -102,11 +102,11 @@ module['exports'] = function myService (req, res, next) {
 						hook.res.end(personID);
 					})
 					.catch(function (error) {
-						hook.res.end('Inner then ',error)
+						hook.res.end(JSON.stringify(error));
 					});
 			}) //.then
 			.catch(function (error) {
-				hook.res.end('Outer then',error)
+				hook.res.end(JSON.stringify(error));
 			});
 		}// postToPerson
 
@@ -132,7 +132,7 @@ module['exports'] = function myService (req, res, next) {
 		.catch(function (error)
 		{
 			console.log(error);
-			hook.res.end(error)
+			hook.res.end(error);
 		});
 	}// function
 /*  store.get('github', function(err, result){
