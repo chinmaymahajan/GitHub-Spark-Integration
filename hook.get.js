@@ -20,7 +20,7 @@ module['exports'] = function myService (req, res, next) {
 			message = "Review is requested for this PR "
 			+ hook.params.pull_request.title + " - "
 			+ hook.params.pull_request.html_url + " from "
-			+ hook.params.pull_request.user.login;
+			+ hook.params.review.user.login;
 			postInRoom(message);
 		}
 
@@ -34,7 +34,7 @@ module['exports'] = function myService (req, res, next) {
 		message = "Review is submitted for this PR "
 		+ hook.params.pull_request.title + " - "
 		+ hook.params.pull_request.html_url + " from "
-		+ hook.params.pull_request.user.login;
+		+ hook.params.review.user.login;
 		postInRoom(message);
 	}
 
@@ -42,9 +42,19 @@ module['exports'] = function myService (req, res, next) {
 		message = "Review is dismissed for this PR "
 		+ hook.params.pull_request.title + " - "
 		+ hook.params.pull_request.html_url + " from "
-		+ hook.params.pull_request.user.login;
+		+ hook.params.review.user.login;
 		postInRoom(message);
 	}
+
+	if (hook.params.action === "labeled") {
+		message = "This PR is labelled as "
+		+ hook.params.pull_request.head.label
+		+ hook.params.pull_request.title + " - "
+		+ hook.params.pull_request.html_url;
+		postInRoom(message);
+		// person whos PR is reviewed hook.params.pull_request.user.login;
+	}
+
 	if (hook.params.label) {
 		message = "This PR " + hook.params.html_url + "is labeled as " + hook.params.label.name;
 			postInRoom(message);
